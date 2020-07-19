@@ -9,17 +9,23 @@ class CompaniesRepository implements ICompaniesRepository {
   constructor() {
     this.ormRepository = getRepository(Company);
   }
+  public async findById(id: number): Promise<Company | undefined> {
+    const company = await this.ormRepository.findOne({ where: { id } });
+
+    return company;
+  }
   public async findByEmail(email: string): Promise<Company | undefined> {
     const company = await this.ormRepository.findOne({ where: { email } });
 
     return company;
   }
-  public async create({ name, email, site, cnpj }: ICreateCompanyDTO): Promise<Company> {
+  public async create({ name, email, site, cnpj, avatar }: ICreateCompanyDTO): Promise<Company> {
     const company = await this.ormRepository.create({
       name,
       email,
       site,
-      cnpj
+      cnpj,
+      avatar
     });
 
     await this.ormRepository.save(company);

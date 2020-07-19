@@ -5,6 +5,8 @@ import IOccupationRepository from '@modules/Occupation/repositories/IOcuppationR
 import OccupationRepository from '@modules/Occupation/infra/typeorm/repositories/OccupationRepository';
 import ICompaniesRepository from '@modules/Company/repositories/ICompaniesRepository';
 import CompaniesRepository from '@modules/Company/infra/typeorm/repositories/CompaniesRepository';
+import IJobsRepository from '@modules/Company/repositories/IJobsRepository';
+import JobsRepository from '@modules/Company/infra/typeorm/repositories/JobsRepository';
 
 
 container.registerSingleton<IOccupationRepository>(
@@ -20,4 +22,9 @@ container.registerSingleton<ICandidatesRepository>(
 container.registerSingleton<ICompaniesRepository>(
   'CompaniesRepository',
   CompaniesRepository,
+);
+
+container.registerSingleton<IJobsRepository>(
+  'JobsRepository',
+  JobsRepository,
 );

@@ -8,6 +8,7 @@ interface IRequest {
   cnpj: string;
   site: string;
   email: string;
+  avatar: string;
 }
 
 @injectable()
@@ -17,7 +18,7 @@ class CreateCompanyService {
     private companiesRepository: ICompaniesRepository
   ) {}
 
-  public async execute({ name, cnpj, site, email }: IRequest): Promise<Company> {
+  public async execute({ name, cnpj, site, email,avatar }: IRequest): Promise<Company> {
     const checkCompanyExists = await this.companiesRepository.findByEmail(email);
 
     if(checkCompanyExists) {
@@ -28,7 +29,8 @@ class CreateCompanyService {
       name,
       cnpj,
       site,
-      email
+      email,
+      avatar
     });
 
     return company;
