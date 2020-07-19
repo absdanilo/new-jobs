@@ -5,7 +5,7 @@ import ICandidateRepository from '../repositories/ICandidateRepository';
 class DeleteCandidateService {
   constructor(
     @inject('CandidatesRepository')
-    private candidatesRepository: ICandidateRepository
+    private candidatesRepository: ICandidateRepository,
   ) {}
 
   public async execute(id: number): Promise<void> {

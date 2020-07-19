@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
+import AppError from '@shared/errors/AppError';
 import ICandidateRepository from '../repositories/ICandidateRepository';
 import Candidate from '../infra/typeorm/entities/Candidate';
-import AppError from '@shared/errors/AppError';
 
 interface IRequest {
   name: string;
@@ -16,13 +16,22 @@ interface IRequest {
 class CreateCandidateService {
   constructor(
     @inject('CandidatesRepository')
-    private candidatesRepository: ICandidateRepository
+    private candidatesRepository: ICandidateRepository,
   ) {}
 
-  public async execute({ name, email, whatsapp, linkedin, lastJob, occupation_area }: IRequest): Promise<Candidate> {
-    const checkCandidateExists = await this.candidatesRepository.findByEmail(email);
+  public async execute({
+    name,
+    email,
+    whatsapp,
+    linkedin,
+    lastJob,
+    occupation_area,
+  }: IRequest): Promise<Candidate> {
+    const checkCandidateExists = await this.candidatesRepository.findByEmail(
+      email,
+    );
 
-    if(checkCandidateExists) {
+    if (checkCandidateExists) {
       throw new AppError('Email addres already used.');
     }
 
@@ -32,7 +41,7 @@ class CreateCandidateService {
       whatsapp,
       linkedin,
       lastJob,
-      occupation_area
+      occupation_area,
     });
 
     return candidate;

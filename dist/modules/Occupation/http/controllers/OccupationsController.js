@@ -61,7 +61,7 @@ var OccupationsController = /** @class */ (function () {
             });
         });
     };
-    OccupationsController.prototype.findAll = function (response) {
+    OccupationsController.prototype.findAll = function (_, response) {
         return __awaiter(this, void 0, void 0, function () {
             var findOccupations, occupations;
             return __generator(this, function (_a) {

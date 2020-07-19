@@ -1,7 +1,7 @@
-import { injectable, inject } from "tsyringe";
-import ICompaniesRepository from "../repositories/ICompaniesRepository";
-import Company from "../infra/typeorm/entities/Company";
-import AppError from "@shared/errors/AppError";
+import { injectable, inject } from 'tsyringe';
+import AppError from '@shared/errors/AppError';
+import ICompaniesRepository from '../repositories/ICompaniesRepository';
+import Company from '../infra/typeorm/entities/Company';
 
 interface IRequest {
   name: string;
@@ -15,13 +15,21 @@ interface IRequest {
 class CreateCompanyService {
   constructor(
     @inject('CompaniesRepository')
-    private companiesRepository: ICompaniesRepository
+    private companiesRepository: ICompaniesRepository,
   ) {}
 
-  public async execute({ name, cnpj, site, email,avatar }: IRequest): Promise<Company> {
-    const checkCompanyExists = await this.companiesRepository.findByEmail(email);
+  public async execute({
+    name,
+    cnpj,
+    site,
+    email,
+    avatar,
+  }: IRequest): Promise<Company> {
+    const checkCompanyExists = await this.companiesRepository.findByEmail(
+      email,
+    );
 
-    if(checkCompanyExists) {
+    if (checkCompanyExists) {
       throw new AppError('Email addres already used.');
     }
 
@@ -30,7 +38,7 @@ class CreateCompanyService {
       cnpj,
       site,
       email,
-      avatar
+      avatar,
     });
 
     return company;

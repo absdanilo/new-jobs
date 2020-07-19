@@ -1,8 +1,8 @@
-import { injectable, inject } from "tsyringe";
-import IJobsRepository from "../repositories/IJobsRepository";
-import Job from "../infra/typeorm/entities/Job";
-import ICompaniesRepository from "../repositories/ICompaniesRepository";
-import AppError from "@shared/errors/AppError";
+import { injectable, inject } from 'tsyringe';
+import AppError from '@shared/errors/AppError';
+import IJobsRepository from '../repositories/IJobsRepository';
+import Job from '../infra/typeorm/entities/Job';
+import ICompaniesRepository from '../repositories/ICompaniesRepository';
 
 interface IRequest {
   title: string;
@@ -19,13 +19,22 @@ class CreateJobSerivce {
     @inject('JobsRepository')
     private jobsRepository: IJobsRepository,
     @inject('CompaniesRepository')
-    private companiesRepository: ICompaniesRepository
+    private companiesRepository: ICompaniesRepository,
   ) {}
 
-  public async execute({ title, salary, occupation_area, job_model, description, company_id  }: IRequest): Promise<Job> {
-    const checkCompanyExists = await this.companiesRepository.findById(company_id);
+  public async execute({
+    title,
+    salary,
+    occupation_area,
+    job_model,
+    description,
+    company_id,
+  }: IRequest): Promise<Job> {
+    const checkCompanyExists = await this.companiesRepository.findById(
+      company_id,
+    );
 
-    if(!checkCompanyExists) {
+    if (!checkCompanyExists) {
       throw new AppError('Company does not exists.');
     }
 
@@ -35,7 +44,7 @@ class CreateJobSerivce {
       description,
       job_model,
       occupation_area,
-      salary
+      salary,
     });
 
     return job;

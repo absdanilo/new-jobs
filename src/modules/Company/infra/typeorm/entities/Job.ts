@@ -1,6 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from "typeorm";
-import Company from "./Company";
-import Occupation from "@modules/Occupation/infra/typeorm/entities/Occupation";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import Occupation from '@modules/Occupation/infra/typeorm/entities/Occupation';
+import Company from './Company';
 
 @Entity('jobs')
 class Job {

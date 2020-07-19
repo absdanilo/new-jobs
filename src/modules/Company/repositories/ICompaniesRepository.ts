@@ -1,5 +1,5 @@
-import Company from "../infra/typeorm/entities/Company";
-import ICreateCompanyDTO from "../dtos/ICreateCompanyDTO";
+import Company from '../infra/typeorm/entities/Company';
+import ICreateCompanyDTO from '../dtos/ICreateCompanyDTO';
 
 export default interface ICompaniesRepository {
   findById(id: number): Promise<Company | undefined>;

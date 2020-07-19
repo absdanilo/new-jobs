@@ -6,7 +6,7 @@ import Occupation from '../infra/typeorm/entities/Occupation';
 class FindAllOccupationsSerivce {
   constructor(
     @inject('OccupationRepository')
-    private occupationsRepository: IOccupationRepository
+    private occupationsRepository: IOccupationRepository,
   ) {}
 
   public async execute(): Promise<Occupation[]> {

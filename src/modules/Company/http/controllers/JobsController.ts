@@ -1,8 +1,9 @@
-import { Request, Response } from 'express';
+import { Request, Response, request } from 'express';
 import { container } from 'tsyringe';
 import CreateJobSerivce from '@modules/Company/services/CreateJobService';
 import FindByOccupationJobService from '@modules/Company/services/FindByOccupationJobService';
 import FindAllJobsService from '@modules/Company/services/FindAllJobsService';
+import paginate from 'utils/paginate';
 
 export default class JobsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -31,11 +32,20 @@ export default class JobsController {
     return response.json(jobs);
   }
 
-  public async findAllJobs(_: Request, response: Response): Promise<Response> {
+  public async findAllJobs(request: Request, response: Response): Promise<Response> {
+    const { page = 1 } = request.query;
+    const pageSize = 20;
+
     const findAllJobs = await container.resolve(FindAllJobsService);
 
     const jobs = await findAllJobs.execute();
+    const jobsPaginate = paginate(jobs as [], pageSize, Number(1));
 
-    return response.json(jobs);
+    return response.json({
+      page: Number(page),
+      pageSize,
+      totalCount: jobsPaginate.length,
+      jobs: jobsPaginate
+    });
   }
 }

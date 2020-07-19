@@ -45,6 +45,50 @@ var CandidateRepository = /** @class */ (function () {
     function CandidateRepository() {
         this.ormRepository = typeorm_1.getRepository(Candidate_1.default);
     }
+    CandidateRepository.prototype.findAll = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var candidates;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.ormRepository.find({
+                            select: ['id', 'name', 'email', 'last_job', 'linkedin', 'whatsapp'],
+                            relations: ['occupation']
+                        })];
+                    case 1:
+                        candidates = _a.sent();
+                        return [2 /*return*/, candidates];
+                }
+            });
+        });
+    };
+    CandidateRepository.prototype.findByOcuppation = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            var candidates;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.ormRepository.find({
+                            where: { occupation_area: id },
+                            select: ['id', 'name', 'email', 'last_job', 'linkedin', 'whatsapp']
+                        })];
+                    case 1:
+                        candidates = _a.sent();
+                        return [2 /*return*/, candidates];
+                }
+            });
+        });
+    };
+    CandidateRepository.prototype.delete = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.ormRepository.delete(id)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     CandidateRepository.prototype.findByEmail = function (email) {
         return __awaiter(this, void 0, void 0, function () {
             var candidate;

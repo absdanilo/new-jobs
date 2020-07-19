@@ -41,6 +41,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var tsyringe_1 = require("tsyringe");
 var CreateCandidateService_1 = __importDefault(require("@modules/Candidate/services/CreateCandidateService"));
+var DeleteCandidateService_1 = __importDefault(require("@modules/Candidate/services/DeleteCandidateService"));
+var FindEmailCandidateService_1 = __importDefault(require("@modules/Candidate/services/FindEmailCandidateService"));
+var FindAllCandidateService_1 = __importDefault(require("@modules/Candidate/services/FindAllCandidateService"));
+var paginate_1 = __importDefault(require("utils/paginate"));
+var FindByOccupationCandidate_1 = __importDefault(require("@modules/Candidate/services/FindByOccupationCandidate"));
 var CandidatesController = /** @class */ (function () {
     function CandidatesController() {
     }
@@ -63,6 +68,90 @@ var CandidatesController = /** @class */ (function () {
                     case 1:
                         candidate = _b.sent();
                         return [2 /*return*/, response.json(candidate)];
+                }
+            });
+        });
+    };
+    CandidatesController.prototype.findEmail = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var email, findEmailCandidate, candidate;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        email = request.params.email;
+                        findEmailCandidate = tsyringe_1.container.resolve(FindEmailCandidateService_1.default);
+                        return [4 /*yield*/, findEmailCandidate.execute(email)];
+                    case 1:
+                        candidate = _a.sent();
+                        return [2 /*return*/, response.json(candidate)];
+                }
+            });
+        });
+    };
+    CandidatesController.prototype.findAllCandidates = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, page, pageSize, findAllCandidates, candidates, candidatesPaginate;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = request.query.page, page = _a === void 0 ? 1 : _a;
+                        pageSize = 20;
+                        return [4 /*yield*/, tsyringe_1.container.resolve(FindAllCandidateService_1.default)];
+                    case 1:
+                        findAllCandidates = _b.sent();
+                        return [4 /*yield*/, findAllCandidates.execute()];
+                    case 2:
+                        candidates = _b.sent();
+                        console.log(candidates);
+                        candidatesPaginate = paginate_1.default(candidates, pageSize, Number(page));
+                        return [2 /*return*/, response.json({
+                                page: Number(page),
+                                pageSize: pageSize,
+                                totalCount: candidatesPaginate.length,
+                                candidates: candidatesPaginate
+                            })];
+                }
+            });
+        });
+    };
+    CandidatesController.prototype.findByOccupationCandidates = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, page, id, pageSize, findAllCandidates, candidates, candidatesPaginate;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = request.query.page, page = _a === void 0 ? 1 : _a;
+                        id = request.params.id;
+                        pageSize = 20;
+                        return [4 /*yield*/, tsyringe_1.container.resolve(FindByOccupationCandidate_1.default)];
+                    case 1:
+                        findAllCandidates = _b.sent();
+                        return [4 /*yield*/, findAllCandidates.execute(Number(id))];
+                    case 2:
+                        candidates = _b.sent();
+                        candidatesPaginate = paginate_1.default(candidates, pageSize, Number(page));
+                        return [2 /*return*/, response.json({
+                                page: Number(page),
+                                pageSize: pageSize,
+                                totalCount: candidatesPaginate.length,
+                                candidates: candidatesPaginate
+                            })];
+                }
+            });
+        });
+    };
+    CandidatesController.prototype.delete = function (request, response) {
+        return __awaiter(this, void 0, void 0, function () {
+            var id, deleteCandidate;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        id = request.params.id;
+                        deleteCandidate = tsyringe_1.container.resolve(DeleteCandidateService_1.default);
+                        return [4 /*yield*/, deleteCandidate.execute(Number(id))];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/, response.json({ success: true })];
                 }
             });
         });

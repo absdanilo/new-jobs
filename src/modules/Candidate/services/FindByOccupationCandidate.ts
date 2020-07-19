@@ -3,17 +3,17 @@ import ICandidateRepository from '../repositories/ICandidateRepository';
 import Candidate from '../infra/typeorm/entities/Candidate';
 
 @injectable()
-class FindEmailCandidateService {
+class FindByOccupationCandidateService {
   constructor(
     @inject('CandidatesRepository')
     private candidatesRepository: ICandidateRepository,
   ) {}
 
-  public async execute(email: string): Promise<Candidate | undefined> {
-    const candidate = await this.candidatesRepository.findByEmail(email);
+  public async execute(id: number): Promise<Candidate[] | undefined> {
+    const candidates = await this.candidatesRepository.findByOcuppation(id);
 
-    return candidate;
+    return candidates;
   }
 }
 
-export default FindEmailCandidateService;
+export default FindByOccupationCandidateService;

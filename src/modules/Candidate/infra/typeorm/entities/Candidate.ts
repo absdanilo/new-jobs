@@ -1,5 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from "typeorm";
-import Occupation from "../../../../Occupation/infra/typeorm/entities/Occupation";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import Occupation from '../../../../Occupation/infra/typeorm/entities/Occupation';
 
 @Entity('candidates')
 class Candidate {

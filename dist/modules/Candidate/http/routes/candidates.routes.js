@@ -8,4 +8,8 @@ var CandidatesController_1 = __importDefault(require("../controllers/CandidatesC
 var candidatesRouter = express_1.Router();
 var candidatesController = new CandidatesController_1.default();
 candidatesRouter.post('/', candidatesController.create);
+candidatesRouter.get('/find/:email', candidatesController.findEmail);
+candidatesRouter.get('/find/all', candidatesController.findAllCandidates);
+candidatesRouter.get('/find/all/occupation/:id', candidatesController.findByOccupationCandidates);
+candidatesRouter.delete('/delete/:id', candidatesController.delete);
 exports.default = candidatesRouter;

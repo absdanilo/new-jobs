@@ -8,7 +8,6 @@ import CompaniesRepository from '@modules/Company/infra/typeorm/repositories/Com
 import IJobsRepository from '@modules/Company/repositories/IJobsRepository';
 import JobsRepository from '@modules/Company/infra/typeorm/repositories/JobsRepository';
 
-
 container.registerSingleton<IOccupationRepository>(
   'OccupationRepository',
   OccupationRepository,
@@ -24,7 +23,4 @@ container.registerSingleton<ICompaniesRepository>(
   CompaniesRepository,
 );
 
-container.registerSingleton<IJobsRepository>(
-  'JobsRepository',
-  JobsRepository,
-);
+container.registerSingleton<IJobsRepository>('JobsRepository', JobsRepository);

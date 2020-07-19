@@ -1,5 +1,5 @@
-import ICreateJobDTO from "../dtos/ICreateJobDTO";
-import Job from "../infra/typeorm/entities/Job";
+import ICreateJobDTO from '../dtos/ICreateJobDTO';
+import Job from '../infra/typeorm/entities/Job';
 
 export default interface IJobsRepository {
   findAll(): Promise<Job[]>;
