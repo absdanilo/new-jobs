@@ -27,14 +27,12 @@ class CompaniesRepository implements ICompaniesRepository {
     email,
     site,
     cnpj,
-    avatar,
   }: ICreateCompanyDTO): Promise<Company> {
     const company = await this.ormRepository.create({
       name,
       email,
       site,
       cnpj,
-      avatar,
     });
 
     await this.ormRepository.save(company);

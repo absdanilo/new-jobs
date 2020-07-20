@@ -3,5 +3,4 @@ export default interface ICreateCompanyDTO {
   cnpj: string;
   site: string;
   email: string;
-  avatar: string;
 }

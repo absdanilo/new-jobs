@@ -8,7 +8,6 @@ interface IRequest {
   cnpj: string;
   site: string;
   email: string;
-  avatar: string;
 }
 
 @injectable()
@@ -23,7 +22,6 @@ class CreateCompanyService {
     cnpj,
     site,
     email,
-    avatar,
   }: IRequest): Promise<Company> {
     const checkCompanyExists = await this.companiesRepository.findByEmail(
       email,
@@ -38,7 +36,6 @@ class CreateCompanyService {
       cnpj,
       site,
       email,
-      avatar,
     });
 
     return company;

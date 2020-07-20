@@ -2,8 +2,8 @@
   "type": "postgres",
   "host": "localhost",
   "port": "5432",
-  "username": "your user",
-  "password": "your secret pass",
+  "username": "postgres",
+  "password": "docker",
   "database": "new-jobs",
   "entities": [
     "./src/modules/**/infra/typeorm/entities/*.ts"

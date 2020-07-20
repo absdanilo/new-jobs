@@ -4,7 +4,7 @@ import CreateCompanyService from '@modules/Company/services/CreateCompanyService
 
 export default class CompaniesController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, email, site, cnpj, avatar } = request.body;
+    const { name, email, site, cnpj } = request.body;
     const createCompany = await container.resolve(CreateCompanyService);
 
     const company = await createCompany.execute({
@@ -12,7 +12,6 @@ export default class CompaniesController {
       email,
       cnpj,
       site,
-      avatar
     });
 
     return response.json(company);
